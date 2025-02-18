@@ -1,0 +1,37 @@
+ood_dataset:
+  name: imagenet200_ood
+  num_classes: 200
+
+  dataset_class: ImglistDataset
+  interpolation: bilinear
+  batch_size: 256
+  shuffle: False
+
+  pre_size: 256
+  image_size: 224
+  num_workers: '@{num_workers}'
+  num_gpus: '@{num_gpus}'
+  num_machines: '@{num_machines}'
+  split_names: [val, nearood, farood]
+  val:
+    data_dir: ./data/images_largescale/
+    imglist_pth: ./data/benchmark_imglist/imagenet200/val_openimage_o.txt
+  nearood:
+    datasets: [ssb_hard, ninco]
+    ssb_hard:
+      data_dir: ./data/images_largescale/
+      imglist_pth: ./data/benchmark_imglist/imagenet/test_ssb_hard.txt
+    ninco:
+      data_dir: ./data/images_largescale/
+      imglist_pth: ./data/benchmark_imglist/imagenet/test_ninco.txt
+  farood:
+    datasets: [inaturalist, textures, openimageo]
+    textures:
+      data_dir: ./data/images_classic/
+      imglist_pth: ./data/benchmark_imglist/imagenet/test_textures.txt
+    inaturalist:
+      data_dir: ./data/images_largescale/
+      imglist_pth: ./data/benchmark_imglist/imagenet/test_inaturalist.txt
+    openimageo:
+      data_dir: ./data/images_largescale/
+      imglist_pth: ./data/benchmark_imglist/imagenet/test_openimage_o.txt
