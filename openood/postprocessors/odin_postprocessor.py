@@ -19,6 +19,7 @@ class ODINPostprocessor(BasePostprocessor):
             self.input_std = normalization_dict[self.config.dataset.name][1]
         except KeyError:
             self.input_std = [0.5, 0.5, 0.5]
+            print('No normalization found for dataset. Using default values.')
         self.args_dict = self.config.postprocessor.postprocessor_sweep
 
     def postprocess(self, net: nn.Module, data: Any):
@@ -42,9 +43,13 @@ class ODINPostprocessor(BasePostprocessor):
         gradient = (gradient.float() - 0.5) * 2
 
         # Scaling values taken from original code
-        gradient[:, 0] = (gradient[:, 0]) / self.input_std[0]
-        gradient[:, 1] = (gradient[:, 1]) / self.input_std[1]
-        gradient[:, 2] = (gradient[:, 2]) / self.input_std[2]
+        # 3D Data with one channel
+        if gradient.shape[1] == 1 and len(gradient.shape) == 5:
+            gradient[:, 0] = (gradient[:, 0]) / self.input_std[0]
+        else: 
+            gradient[:, 0] = (gradient[:, 0]) / self.input_std[0]
+            gradient[:, 1] = (gradient[:, 1]) / self.input_std[1]
+            gradient[:, 2] = (gradient[:, 2]) / self.input_std[2]
 
         # Adding small perturbations to images
         tempInputs = torch.add(data.detach(), gradient, alpha=-self.noise)
