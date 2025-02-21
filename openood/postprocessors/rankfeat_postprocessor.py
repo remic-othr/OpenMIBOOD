@@ -11,6 +11,16 @@ class RankFeatPostprocessor(BasePostprocessor):
         super(RankFeatPostprocessor, self).__init__(config)
         self.config = config
         self.args = self.config.postprocessor.postprocessor_args
+        self.args_dict = self.config.postprocessor.postprocessor_sweep
+        self.accelerate = self.args.accelerate
+        self.temperature = self.args.temperature
+    
+    def set_hyperparam(self, hyperparam: list):
+        self.accelerate = hyperparam[0]
+        self.temperature = hyperparam[1]
+
+    def get_hyperparam(self):
+        return [self.accelerate, self.temperature]
 
     @torch.no_grad()
     def postprocess(self, net: nn.Module, data: Any):
@@ -18,35 +28,53 @@ class RankFeatPostprocessor(BasePostprocessor):
 
         # Logit of Block 4 feature
         feat1 = net.intermediate_forward(inputs, layer_index=4)
-        B, C, H, W = feat1.size()
-        feat1 = feat1.view(B, C, H * W)
-        if self.args.accelerate:
+        feat_len = len(feat1.shape)
+        if feat_len == 5:
+            B, C, H, W, D = feat1.size()
+            feat1 = feat1.view(B, C, H * W * D)
+        else:
+            B, C, H, W = feat1.size()
+            feat1 = feat1.view(B, C, H * W)
+        
+        if self.accelerate:
             feat1 = feat1 - power_iteration(feat1, iter=20)
         else:
             u, s, v = torch.linalg.svd(feat1, full_matrices=False)
             feat1 = feat1 - s[:, 0:1].unsqueeze(2) * u[:, :, 0:1].bmm(
                 v[:, 0:1, :])
-        feat1 = feat1.view(B, C, H, W)
-        logits1 = net.fc(torch.flatten(net.avgpool(feat1), 1))
+            
+        if feat_len == 5:
+            feat1 = feat1.view(B, C, H, W, D)
+        else:
+            feat1 = feat1.view(B, C, H, W)
+        fc = net.get_fc_layer()
+        logits1 = fc(torch.flatten(net.avgpool(feat1), 1))
 
         # Logit of Block 3 feature
         feat2 = net.intermediate_forward(inputs, layer_index=3)
-        B, C, H, W = feat2.size()
-        feat2 = feat2.view(B, C, H * W)
-        if self.args.accelerate:
+        if feat_len == 5:
+            B, C, H, W, D = feat2.size()
+            feat2 = feat2.view(B, C, H * W * D)
+        else:
+            B, C, H, W = feat2.size()
+            feat2 = feat2.view(B, C, H * W)
+        if self.accelerate:
             feat2 = feat2 - power_iteration(feat2, iter=20)
         else:
             u, s, v = torch.linalg.svd(feat2, full_matrices=False)
             feat2 = feat2 - s[:, 0:1].unsqueeze(2) * u[:, :, 0:1].bmm(
                 v[:, 0:1, :])
-        feat2 = feat2.view(B, C, H, W)
+        if feat_len == 5:
+            feat2 = feat2.view(B, C, H, W, D)
+        else:
+            feat2 = feat2.view(B, C, H, W)
         feat2 = net.layer4(feat2)
-        logits2 = net.fc(torch.flatten(net.avgpool(feat2), 1))
+        logits2 = fc(torch.flatten(net.avgpool(feat2), 1))
 
         # Fusion at the logit space
         logits = (logits1 + logits2) / 2
-        conf = self.args.temperature * torch.logsumexp(
-            logits / self.args.temperature, dim=1)
+        conf = self.temperature * torch.logsumexp(
+            logits / self.temperature, dim=1)
 
         _, pred = torch.max(logits, dim=1)
         return pred, conf
