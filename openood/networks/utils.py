@@ -37,6 +37,7 @@ from .vit_b_16 import ViT_B_16
 from .wrn import WideResNet
 from .rts_net import RTSNet
 from .palm_net import PALMNet
+from .r2plus1d import r2plus1d_18
 
 
 def get_network(network_config):
@@ -57,6 +58,9 @@ def get_network(network_config):
 
     elif network_config.name == 'resnet50':
         net = ResNet50(num_classes=num_classes)
+
+    elif network_config.name == 'r2plus1d':
+        net = r2plus1d_18(num_classes=num_classes)
 
     elif network_config.name == 'lenet':
         net = LeNet(num_classes=num_classes, num_channel=3)
