@@ -14,6 +14,7 @@ class OpenMax(BasePostprocessor):
         super(OpenMax, self).__init__(config)
         self.nc = num_classes_dict[config.dataset.name]
         self.weibull_alpha = 3
+        self.weibull_alpha = min(self.weibull_alpha, self.nc)
         self.weibull_threshold = 0.9
         self.weibull_tail = 20
         self.setup_flag = False
