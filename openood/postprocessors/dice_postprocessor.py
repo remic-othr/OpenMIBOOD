@@ -61,6 +61,8 @@ class DICEPostprocessor(BasePostprocessor):
 
     def set_hyperparam(self, hyperparam: list):
         self.p = hyperparam[0]
+        # With this, it is ensured that the mask is recalculated with the final selected hyperparameter
+        self.masked_w = None
 
     def get_hyperparam(self):
         return self.p
