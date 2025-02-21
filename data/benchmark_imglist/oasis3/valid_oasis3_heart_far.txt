@@ -1,0 +1,10 @@
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_015.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_025.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_013.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_001.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_027.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_006.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_008.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_012.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_028.nii.gz -1
+far/SegmentationDecathlon/Task02_Heart/imagesTs/la_002.nii.gz -1

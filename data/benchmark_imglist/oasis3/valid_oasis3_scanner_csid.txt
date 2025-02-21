@@ -1,0 +1,10 @@
+OASIS3/OAS30412/OAS30412_MR_d6024/anat5/NIFTI/sub-OAS30412_ses-d6024_run-03_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30565/OAS30565_MR_d3127/anat3/NIFTI/sub-OAS30565_ses-d3127_run-01_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30965/OAS30965_MR_d0791/anat4/NIFTI/sub-OAS30965_ses-d0791_run-02_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30022/OAS30022_MR_d1324/anat3/NIFTI/sub-OAS30022_ses-d1324_run-01_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30381/OAS30381_MR_d1158/anat3/NIFTI/sub-OAS30381_ses-d1158_run-01_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30120/OAS30120_MR_d0784/anat6/NIFTI/sub-OAS30120_ses-d0784_run-04_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30041/OAS30041_MR_d6548/anat6/NIFTI/sub-OAS30041_ses-d6548_run-04_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30860/OAS30860_MR_d0638/anat3/NIFTI/sub-OAS30860_ses-d0638_run-01_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS30365/OAS30365_MR_d6199/anat4/NIFTI/sub-OAS30365_ses-d6199_run-02_T1w_resampled_skull_stripped.nii.gz -1
+OASIS3/OAS31122/OAS31122_MR_d2180/anat4/NIFTI/sub-OAS31122_ses-d2180_run-02_T1w_resampled_skull_stripped.nii.gz -1
