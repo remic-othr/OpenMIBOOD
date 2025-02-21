@@ -24,9 +24,17 @@ class SHEPostprocessor(BasePostprocessor):
     def __init__(self, config):
         super(SHEPostprocessor, self).__init__(config)
         self.args = self.config.postprocessor.postprocessor_args
+        self.args_dict = self.config.postprocessor.postprocessor_sweep
         self.num_classes = num_classes_dict[self.config.dataset.name]
         self.activation_log = None
         self.setup_flag = False
+        self.metric = self.args.metric
+    
+    def set_hyperparam(self, hyperparam: list):
+        self.metric = hyperparam[0]
+
+    def get_hyperparam(self):
+        return self.metric
 
     def setup(self, net: nn.Module, id_loader_dict, ood_loader_dict):
         if not self.setup_flag:
