@@ -123,11 +123,11 @@ def tensor2list(x):
 def get_torch_feature_stat(feature, only_mean=False):
     feature = feature.view([feature.size(0), feature.size(1), -1])
     feature_mean = torch.mean(feature, dim=-1)
-    feature_var = torch.var(feature, dim=-1)
     if feature.size(-2) * feature.size(-1) == 1 or only_mean:
         # [N, C, 1, 1] does not need variance for kernel
         feature_stat = feature_mean
     else:
+        feature_var = torch.var(feature, dim=-1)
         feature_stat = torch.cat((feature_mean, feature_var), 1)
     return feature_stat
 
@@ -299,22 +299,29 @@ def compute_Mahalanobis_score(model,
     gradient = torch.ge(data.grad.data, 0)
     gradient = (gradient.float() - 0.5) * 2
 
-    # here we use the default value of 0.5
-    gradient.index_copy_(
-        1,
-        torch.LongTensor([0]).cuda(),
-        gradient.index_select(1,
-                              torch.LongTensor([0]).cuda()) / 0.5)
-    gradient.index_copy_(
-        1,
-        torch.LongTensor([1]).cuda(),
-        gradient.index_select(1,
-                              torch.LongTensor([1]).cuda()) / 0.5)
-    gradient.index_copy_(
-        1,
-        torch.LongTensor([2]).cuda(),
-        gradient.index_select(1,
-                              torch.LongTensor([2]).cuda()) / 0.5)
+    if gradient.shape[1] == 1 and len(gradient.shape) == 5:
+        gradient.index_copy_(
+            1,
+            torch.LongTensor([0]).cuda(),
+            gradient.index_select(1,
+                                torch.LongTensor([0]).cuda()) / 0.5)
+    else:
+        # here we use the default value of 0.5
+        gradient.index_copy_(
+            1,
+            torch.LongTensor([0]).cuda(),
+            gradient.index_select(1,
+                                torch.LongTensor([0]).cuda()) / 0.5)
+        gradient.index_copy_(
+            1,
+            torch.LongTensor([1]).cuda(),
+            gradient.index_select(1,
+                                torch.LongTensor([1]).cuda()) / 0.5)
+        gradient.index_copy_(
+            1,
+            torch.LongTensor([2]).cuda(),
+            gradient.index_select(1,
+                                torch.LongTensor([2]).cuda()) / 0.5)
     tempInputs = torch.add(
         data.data, gradient,
         alpha=-magnitude)  # updated input data with perturbation
@@ -352,7 +359,7 @@ def alpha_selector(data_in, data_out):
     data = np.concatenate([data_in, data_out])
     label = np.concatenate([label_in, label_out])
     # skip the last-layer flattened feature (duplicated with the last feature)
-    lr = LogisticRegressionCV(n_jobs=-1).fit(data, label)
+    lr = LogisticRegressionCV(n_jobs=-1, max_iter=1000).fit(data, label)
     alpha_list = lr.coef_.reshape(-1)
     print(f'Optimal Alpha List: {alpha_list}')
     return alpha_list
