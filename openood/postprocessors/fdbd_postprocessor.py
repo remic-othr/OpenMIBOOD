@@ -9,9 +9,7 @@ from .base_postprocessor import BasePostprocessor
 
 
 class fDBDPostprocessor(BasePostprocessor):
-    """Empirically, the feature norm (torch.norm(feature, dim=1)) is sometimes
-    a more effective regularizer than.
-
+    """Empirically, the feature norm (torch.norm(feature, dim=1)) is sometimes a more effective regularizer than 
     the feature distance to the training feature mean (torch.norm(feature - self.train_mean, dim=1)). In this
     implementation, we diverge slightly from the original paper by selecting the regularizer based on the
     validation set.
