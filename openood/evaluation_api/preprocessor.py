@@ -1,4 +1,7 @@
 import torchvision.transforms as tvs_trans
+import torch
+import torchio as tio
+from monai.transforms import CropForeground
 
 from openood.preprocessors import BasePreprocessor
 from openood.utils import Config
@@ -6,6 +9,21 @@ from openood.utils import Config
 INTERPOLATION = tvs_trans.InterpolationMode.BILINEAR
 
 default_preprocessing_dict = {
+    'midog': {
+        'pre_size': 50,
+        'img_size': 50,
+        'normalization': [[0.712, 0.496, 0.756], [0.167, 0.167, 0.110]],
+    },
+    'phakir': {
+        'pre_size': (360, 640),
+        'img_size': (360, 640),
+        'normalization': [[0.517, 0.361, 0.336], [0.166, 0.143, 0.137]],
+    },
+    'oasis3': {
+        'pre_size': 128,
+        'img_size': 128,
+        'normalization': 'z-normalize',
+    },
     'cifar10': {
         'pre_size': 32,
         'img_size': 32,
@@ -74,6 +92,36 @@ def get_default_preprocessor(data_name: str):
         raise NotImplementedError(f'The dataset {data_name} is not supported')
 
     config = Config(**default_preprocessing_dict[data_name])
-    preprocessor = TestStandardPreProcessor(config)
+    if data_name == 'oasis3':
+        preprocessor = Oasis3PreProcessor(config.pre_size)
+    else:
+        preprocessor = TestStandardPreProcessor(config)
 
     return preprocessor
+
+class ToTensor:
+    def __call__(self, sample):
+        return torch.tensor(sample.get_fdata())
+    
+class AddChannelDim:
+    def __call__(self, sample, dim=0):
+        return sample.unsqueeze(dim=dim)
+
+class ToFloat:
+    def __call__(self, sample):
+        return sample.float()
+
+def empty_threshold(x):
+    return x > 0
+
+class Oasis3PreProcessor(BasePreprocessor):
+    def __init__(self, crop_dim):
+        self.transform = tvs_trans.Compose([
+            tio.ToCanonical(),
+            ToTensor(),
+            AddChannelDim(),
+            CropForeground(select_fn=empty_threshold, margin=0,  k_divisible=[crop_dim, crop_dim, crop_dim]),
+            tio.CropOrPad((crop_dim,crop_dim,crop_dim)),
+            ToFloat(),
+            tio.ZNormalization()
+    ])
