@@ -1,5 +1,8 @@
 postprocessor:
   name: she
-  APS_mode: False
+  APS_mode: True
   postprocessor_args:
     metric: inner_product
+  postprocessor_sweep:
+    metric_list: [inner_product, euclidean, cosine]
+    
