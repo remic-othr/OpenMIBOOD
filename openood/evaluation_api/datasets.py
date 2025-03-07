@@ -15,6 +15,210 @@ from openood.preprocessors import BasePreprocessor
 from .preprocessor import get_default_preprocessor, ImageNetCPreProcessor
 
 DATA_INFO = {
+    'midog': {
+        'num_classes': 3,
+        'id': {
+            'train': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/train_midog.txt' # 1a
+            },
+            'val': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/valid_midog.txt' # 1a
+            },
+            'test': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/test_midog.txt' # 1a
+            }
+        },
+        'csid': {
+            'datasets': ['midog_csid_1b', 'midog_csid_1c'],
+            'midog_train': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/train_midog.txt' 
+            },
+            'midog_csid_1b': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/test_midog_1b.txt' 
+            },
+            'midog_csid_1c': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/test_midog_1c.txt' 
+            }
+        },
+        'ood': {
+            'val': {
+                'data_dir': 'midog/',
+                'imglist_path': 'benchmark_imglist/midog/valid_midog_near.txt'
+            },
+            'near': {
+                'datasets': ['midog_2', 'midog_3', 'midog_4', 'midog_5', 'midog_6a', 'midog_6b', 'midog_7'],
+                'midog_2': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_2.txt' 
+                },
+                'midog_3': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_3.txt' 
+                },
+                'midog_4': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_4.txt' 
+                },
+                'midog_5': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_5.txt' 
+                },
+                'midog_6a': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_6a.txt'
+                },
+                'midog_6b': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_6b.txt'
+                },
+                'midog_7': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_7.txt' 
+                }
+            },
+            'far': {
+                'datasets': ['midog_ccagt', 'midog_fnac2019'],
+                'midog_ccagt': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_ccagt.txt'
+                },
+                'midog_fnac2019': {
+                    'data_dir': 'midog/',
+                    'imglist_path': 'benchmark_imglist/midog/test_midog_fnac2019.txt'
+                }
+            }
+        }
+    },
+    'phakir': {
+        'num_classes': 7,
+        'id': {
+            'train': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/train_phakir.txt' # Video_02, Video_03, Video_04, Video_07
+            },
+            'val': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/valid_phakir.txt' # Video_05
+            },
+            'test': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/test_phakir.txt' # Video_01
+            }
+        },
+        'csid': {
+            'datasets': ['phakir_medium_smoke', 'phakir_heavy_smoke'],
+            'phakir_medium_smoke': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/test_phakir_medium_smoke_csid.txt' 
+            },
+            'phakir_heavy_smoke': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/test_phakir_heavy_smoke_csid.txt'
+            }
+        },
+        'ood': {
+            'val': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/valid_phakir_near.txt'
+            },
+            'near': {
+                'datasets': ['phakir_cholec', 'phakir_endovis2015', 'phakir_endovis2018'],
+                'phakir_cholec': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_cholec_near.txt' # Cholec80 Near
+                },
+                'phakir_endovis2015': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_endovis2015_near.txt' # Endovis2015 Near
+                },
+                'phakir_endovis2018': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_endovis2018_near.txt' # Endovis2018 Near
+                }
+            },
+            'far': {
+                'datasets': ['phakir_kvasir', 'phakir_cataracts'],
+                'phakir_kvasir': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_kvasir_far.txt' # Kvasir-Seg Far
+                },
+                'phakir_barret': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_barret_far.txt' # Barret MICCAI2015 Far
+                },
+                'phakir_cataracts': {
+                    'data_dir': 'phakir/',
+                    'imglist_path': 'benchmark_imglist/phakir/test_phakir_cataracts_far.txt' # CATARACTS Far
+                }
+            }
+        }
+    },
+    'oasis3': {
+        'num_classes': 2,
+        'id': {
+            'train': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/train_oasis3.txt' # T1w OASIS3 data
+            },
+            'val': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/valid_oasis3.txt' # T1w OASIS3 data
+            },
+            'test': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/test_oasis3.txt' # T1w OASIS3 data
+            }
+        },
+        'csid': {
+            'datasets': ['oasis3_scanner', 'oasis3_modality'],
+            'oasis3_scanner': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_scanner_csid.txt' # T1w OASIS3 data from 'Vision' MRI scanner
+            },
+            'oasis3_modality': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_t2w_csid.txt' # T2w OASIS3 data
+            }
+        },
+        'ood': {
+            'val': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/valid_oasis3_near.txt'
+            },
+            'near': {
+                'datasets': ['oasis3_atlas', 'oasis3_brats', 'oasis3_ct'],
+                'oasis3_atlas': {
+                    'data_dir': 'oasis/',
+                    'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_atlas_near.txt' # ATLAS T1w data
+                },
+                'oasis3_brats': {
+                    'data_dir': 'oasis/',
+                    'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_brats_near.txt' # BraTS T1w data
+                },
+                'oasis3_ct': {
+                    'data_dir': 'oasis/',
+                    'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_ct_near.txt' # OASIS3 CT data
+                }
+            },
+            'far': {
+                'datasets': ['oasis3_heart', 'oasis3_chaos_inPhase'],
+                'oasis3_heart': {
+                    'data_dir': 'oasis/',
+                    'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_heart_far.txt' # Heart MRI data
+                },
+                'oasis3_chaos_inPhase': {
+                    'data_dir': 'oasis/',
+                    'imglist_path': 'benchmark_imglist/oasis3/test_oasis3_chaos_inPhase_far.txt' # CHAOS MRI data
+                }
+            }
+        }
+    },
     'cifar10': {
         'num_classes': 10,
         'id': {
@@ -354,6 +558,9 @@ dir_dict = {
 }
 
 benchmarks_dict = {
+    'oasis3': [],
+    'phakir': [],
+    'midog': [],
     'cifar10':
     ['cifar10', 'cifar100', 'tin', 'mnist', 'svhn', 'texture', 'places365'],
     'cifar100':
