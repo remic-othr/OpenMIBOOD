@@ -8,8 +8,9 @@ def compute_all_metrics(conf, label, pred):
     auroc, aupr_in, aupr_out, fpr = auc_and_fpr_recall(conf, label, recall)
 
     accuracy = acc(pred, label)
+    f1_score = f1(pred, label)
 
-    results = [fpr, auroc, aupr_in, aupr_out, accuracy]
+    results = [fpr, auroc, aupr_in, aupr_out, accuracy, f1_score]
 
     return results
 
@@ -23,6 +24,9 @@ def acc(pred, label):
     acc = num_tp / len(ind_label)
 
     return acc
+
+def f1(pred, label):
+    return metrics.f1_score(label, pred, average='macro')
 
 
 # fpr_recall
