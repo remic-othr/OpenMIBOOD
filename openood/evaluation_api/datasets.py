@@ -15,6 +15,7 @@ from openood.preprocessors import BasePreprocessor
 from .preprocessor import get_default_preprocessor, ImageNetCPreProcessor
 
 DATA_INFO = {
+<<<<<<< HEAD
     'midog': {
         'num_classes': 3,
         'id': {
@@ -219,6 +220,8 @@ DATA_INFO = {
             }
         }
     },
+=======
+>>>>>>> origin/main
     'cifar10': {
         'num_classes': 10,
         'id': {
@@ -558,9 +561,12 @@ dir_dict = {
 }
 
 benchmarks_dict = {
+<<<<<<< HEAD
     'oasis3': [],
     'phakir': [],
     'midog': [],
+=======
+>>>>>>> origin/main
     'cifar10':
     ['cifar10', 'cifar100', 'tin', 'mnist', 'svhn', 'texture', 'places365'],
     'cifar100':

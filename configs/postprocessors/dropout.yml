@@ -3,4 +3,8 @@ postprocessor:
   APS_mode: False
   postprocessor_args:
     dropout_p: 0.5
+<<<<<<< HEAD
     dropout_times: 15
+=======
+    dropout_times: 5
+>>>>>>> origin/main

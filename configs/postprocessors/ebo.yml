@@ -4,4 +4,8 @@ postprocessor:
   postprocessor_args:
     temperature: 1
   postprocessor_sweep:
+<<<<<<< HEAD
     temperature_list: [0.1, 0.5, 1, 1.5, 2.0]
+=======
+    temperature_list: [1]
+>>>>>>> origin/main

@@ -86,4 +86,8 @@ def get_postprocessor(config_root: str, postprocessor_name: str,
     postprocessor = postprocessors[postprocessor_name](config)
     postprocessor.APS_mode = config.postprocessor.APS_mode
     postprocessor.hyperparam_search_done = False
+<<<<<<< HEAD
     return postprocessor, config
+=======
+    return postprocessor
+>>>>>>> origin/main

@@ -2,7 +2,13 @@ postprocessor:
   name: vim
   APS_mode: True
   postprocessor_args:
+<<<<<<< HEAD
     dim: 128
   postprocessor_sweep:
     dim_list: [1, 16, 32, 64, 128, 256]
   hyperparam_search_done: False
+=======
+    dim: 256
+  postprocessor_sweep:
+    dim_list: [256, 1000]
+>>>>>>> origin/main
