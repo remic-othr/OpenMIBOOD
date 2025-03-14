@@ -76,5 +76,5 @@ class SHEPostprocessor(BasePostprocessor):
     def postprocess(self, net: nn.Module, data: Any):
         output, feature = net(data, return_feature=True)
         pred = output.argmax(1)
-        conf = distance(feature, self.activation_log[pred], self.args.metric)
+        conf = distance(feature, self.activation_log[pred], self.metric)
         return pred, conf
