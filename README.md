@@ -6,6 +6,7 @@
 ![Summary of all utilized medical datasets, separated into ID, cs-ID, near-OOD, and far-OOD and their corresponding underlying domain shifts.](Datasets_Summary.jpg)
 
 | :exclamation: The table below lists all medical imaging datasets used in this framework. Each used dataset must be cited at a minimum. However, ensure compliance with its specific citation requirements to properly acknowledge the researchers' contributions.|
+|-----------------------------------------|
 
 ---
 ## Supported Medical Imaging Benchmarks (3)
