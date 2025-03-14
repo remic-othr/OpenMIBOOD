@@ -4,15 +4,15 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='openood',
-    version='1.5',
-    author='openood dev team',
-    author_email='jingkang001@e.ntu.edu.sg',
+    name='OpenMIBOOD',
+    version='1.0',
+    author='OpenMIBOOD dev team',
+    author_email='Github@re-mic.de',
     description=
-    'This package provides a unified test platform for Out-of-Distribution detection.',
+    'This package (https://github.com/remic-othr/OpenMIBOOD) extends the OpenOOD framework from https://github.com/Jingkang50/OpenOOD with three medical imaging benchmarks for Out-Of-Distribution detection.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/Jingkang50/OpenOOD',
+    url='',
     packages=setuptools.find_packages(),
     install_requires=[
         'torch>=1.13.1',
@@ -31,6 +31,12 @@ setuptools.setup(
         'Cython>=0.29.30',
         'faiss-gpu>=1.7.2',
         'gdown>=4.7.1',  # 'libmr>=0.1.9'
+        'hd-bet==2.0.1',
+        'nibabel',
+        'pydicom',
+        'libmr>=0.1.9',
+        'torchio>=0.18.0',
+        'monai>=0.7.0'
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
