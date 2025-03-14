@@ -8,11 +8,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-<<<<<<< HEAD
 from openood.evaluators.metrics import compute_all_metrics, f1
-=======
-from openood.evaluators.metrics import compute_all_metrics
->>>>>>> origin/main
 from openood.postprocessors import BasePostprocessor
 from openood.networks.ash_net import ASHNet
 from openood.networks.react_net import ReactNet
@@ -97,14 +93,9 @@ class Evaluator:
 
         # get postprocessor
         if postprocessor is None:
-<<<<<<< HEAD
             postprocessor, config = get_postprocessor(config_root, postprocessor_name,
                                               id_name)
             self.config = config
-=======
-            postprocessor = get_postprocessor(config_root, postprocessor_name,
-                                              id_name)
->>>>>>> origin/main
         if not isinstance(postprocessor, BasePostprocessor):
             raise TypeError(
                 'postprocessor should inherit BasePostprocessor in OpenOOD')
@@ -137,13 +128,9 @@ class Evaluator:
         self.dataloader_dict = dataloader_dict
         self.metrics = {
             'id_acc': None,
-<<<<<<< HEAD
             'id_f1': None,
             'csid_acc': None,
             'csid_f1': None,
-=======
-            'csid_acc': None,
->>>>>>> origin/main
             'ood': None,
             'fsood': None
         }
@@ -199,7 +186,6 @@ class Evaluator:
         all_preds = torch.cat(all_preds)
         all_labels = torch.cat(all_labels)
         return all_preds, all_labels
-<<<<<<< HEAD
     
     def eval_f1(self, data_name: str = 'id') -> float:
         if data_name == 'id':
@@ -248,8 +234,6 @@ class Evaluator:
                 return f1_score
         else:
             raise ValueError(f'Unknown data name {data_name}')
-=======
->>>>>>> origin/main
 
     def eval_acc(self, data_name: str = 'id') -> float:
         if data_name == 'id':
@@ -388,7 +372,6 @@ class Evaluator:
             print(self.metrics[task])
 
         return self.metrics[task]
-<<<<<<< HEAD
     
     def eval_csid_ood(self, progress: bool = True):
         id_name = 'csid'
@@ -501,8 +484,6 @@ class Evaluator:
         metrics_mean = np.mean(metrics_list, axis=0, keepdims=True)
         self._print_metrics(list(metrics_mean[0]))
         return np.concatenate([metrics_list, metrics_mean], axis=0) * 100
-=======
->>>>>>> origin/main
 
     def _eval_ood(self,
                   id_list: List[np.ndarray],
@@ -546,11 +527,7 @@ class Evaluator:
         return np.concatenate([metrics_list, metrics_mean], axis=0) * 100
 
     def _print_metrics(self, metrics):
-<<<<<<< HEAD
         [fpr, auroc, aupr_in, aupr_out, _, _] = metrics
-=======
-        [fpr, auroc, aupr_in, aupr_out, _] = metrics
->>>>>>> origin/main
 
         # print ood metric results
         print('FPR@95: {:.2f}, AUROC: {:.2f}'.format(100 * fpr, 100 * auroc),
@@ -601,7 +578,6 @@ class Evaluator:
                 max_auroc = auroc
 
         self.postprocessor.set_hyperparam(hyperparam_combination[final_index])
-<<<<<<< HEAD
         final_hyperparams = self.postprocessor.get_hyperparam()
         print('Final hyperparam: {}'.format(final_hyperparams))
         
@@ -617,10 +593,6 @@ class Evaluator:
         for i, name in enumerate(hyperparam_names):
             self.config.postprocessor.postprocessor_args[name] = final_hyperparams[i]
 
-=======
-        print('Final hyperparam: {}'.format(
-            self.postprocessor.get_hyperparam()))
->>>>>>> origin/main
         self.postprocessor.hyperparam_search_done = True
 
     def recursive_generator(self, list, n):

@@ -1,15 +1,7 @@
 postprocessor:
   name: dice
-<<<<<<< HEAD
   APS_mode: True
   postprocessor_args:
     p: 90
   postprocessor_sweep:
     p_list: [60, 65, 70, 75, 80, 85, 90, 95]
-=======
-  APS_mode: False
-  postprocessor_args:
-    p: 90
-  postprocessor_sweep:
-    p_list: [90]
->>>>>>> origin/main

@@ -5,10 +5,7 @@ import os
 
 import torch
 from PIL import Image, ImageFile
-<<<<<<< HEAD
 import nibabel as nib
-=======
->>>>>>> origin/main
 
 from .base_dataset import BaseDataset
 
@@ -77,7 +74,6 @@ class ImglistDataset(BaseDataset):
 
         try:
             if not self.dummy_read:
-<<<<<<< HEAD
                 if not 'oasis' in self.data_dir:
                     with open(path, 'rb') as f:
                         content = f.read()
@@ -91,16 +87,6 @@ class ImglistDataset(BaseDataset):
                 else:
                     image = Image.open(buff).convert('RGB')
 
-=======
-                with open(path, 'rb') as f:
-                    content = f.read()
-                filebytes = content
-                buff = io.BytesIO(filebytes)
-            if self.dummy_size is not None:
-                sample['data'] = torch.rand(self.dummy_size)
-            else:
-                image = Image.open(buff).convert('RGB')
->>>>>>> origin/main
                 sample['data'] = self.transform_image(image)
                 sample['data_aux'] = self.transform_aux_image(image)
             extras = ast.literal_eval(extra_str)

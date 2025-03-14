@@ -1,6 +1,5 @@
 postprocessor:
   name: rankfeat
-<<<<<<< HEAD
   APS_mode: True
   postprocessor_args:
     accelerate: False
@@ -9,9 +8,3 @@ postprocessor:
     accelerate_list: [False, True]
     temperature_list: [0.1, 1, 10, 100, 1000]
   hyperparam_search_done: False
-=======
-  APS_mode: False
-  postprocessor_args:
-    accelerate: False
-    temperature: 1
->>>>>>> origin/main

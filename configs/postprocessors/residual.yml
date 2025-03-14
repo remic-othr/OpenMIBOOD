@@ -1,13 +1,8 @@
 postprocessor:
   name: residual
-<<<<<<< HEAD
   APS_mode: True
   postprocessor_args:
     dim: 128
   postprocessor_sweep:
     dim_list: [32, 64, 128, 256, 512, 1024]
   hyperparam_search_done: False
-=======
-  postprocessor_args:
-    dim: 512
->>>>>>> origin/main
