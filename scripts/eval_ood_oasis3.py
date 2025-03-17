@@ -23,7 +23,7 @@ def update(d, u):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--postprocessor', choices=['ash', 'dice', 'dropout', 'ebo', 'fdbd', 'gen', 'klm', 'knn', 'mls', 'mds_ensemble', 'mds', 'nnguide', 'odin', 'msp', 'openmax', 'rankfeat', 'react', 'relation', 'residual', 'rmds', 'scale', 'she', 'temp_scaling', 'vim'], default='msp')
+parser.add_argument('--postprocessor', choices=['ash', 'dice', 'dropout', 'ebo', 'fdbd', 'gen', 'klm', 'knn', 'mls', 'mds_ensemble', 'mds', 'nnguide', 'odin', 'msp', 'openmax', 'rankfeat', 'react', 'relation', 'residual', 'rmds', 'scale', 'she', 'temp_scaling', 'vim', 'msp'], default='msp')
 parser.add_argument('--save-csv', action='store_true')
 parser.add_argument('--save-score', action='store_true')
 parser.add_argument('--batch-size', default=10, type=int)
