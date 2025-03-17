@@ -138,7 +138,7 @@ if not os.path.exists(root) and os.path.exists(download_path):
         prefix = f'{subset}_'
         input_dir = os.path.join(zip_output, subset)
         input_dir_list = os.listdir(input_dir)
-        sorted(input_dir_list)
+        input_dir_list = sorted(input_dir_list, key=lambda x: int(x.split('.')[0]))
         # Iterate over the files in the input directory
         for filename in tqdm(input_dir_list, desc=f'Processing images from subset {subset}'):
             # Extract file extension
