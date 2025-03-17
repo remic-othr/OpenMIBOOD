@@ -6,41 +6,113 @@ from PIL import Image
 from tqdm import tqdm
 import numpy as np
 import cv2
+import time
 
 
-morph_params = {'morph_kernel_open': 5, 'morph_kernel_erode': 3, 'morph_iter': 1}
+print('##############################################################')
+print('We will try to download the FNAC 2019 dataset automatically from https://1drv.ms/u/s!Al-T6d-_ENf6axsEbvhbEc2gUFs.')
+download_path = 'tmp/fnac2019.zip'
+print('If there are any errors with the automatic download, please visit the above link, download the file manually, move it to "tmp/fnac2019.zip", and run this script again.')
+print('##############################################################')
 
 root = '../../../data/midog/far/fnac2019_crops'
+download_required = True
 
-if not os.path.exists(root):
+if os.path.exists(download_path):
+    download_required = False
+
+if download_required:
     headers = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0',
-            'Accept': 'application/json',
-            'Accept-Language': 'en-US',
-            'Referer': 'https://onedrive.live.com/',
-            'Scenario': 'DownloadFile',
-            'ScenarioType': 'AUO',
-            'Application': 'ODC Web',
-            'Origin': 'https://onedrive.live.com',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'cross-site',
-            'Authorization': 'Badger eyJhbGciOiJSUzI1NiIsImtpZCI6IjEzQTAwRkQ1MEEzMEM1MTVDQjYzMDNFREI3NEE2MTlBNzQ0NUQzRkEiLCJ4NXQiOiJFNkFQMVFvd3hSWExZd1B0dDBwaG1uUkYwX28iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJodHRwczovL29uZWRyaXZlLmNvbS8iLCJpc3MiOiJodHRwczovL2JhZGdlci5zdmMubXMvdjEuMC9hdXRoIiwiZXhwIjoxNzQwNDg2ODAyLCJuYmYiOjE3Mzk4ODIwMDIsImdpdmVuX25hbWUiOiI5NyIsImZhbWlseV9uYW1lIjoiUmhpbm9jZXJvcyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjhjMzNlNzBjMzMzNTFiOTI0MTFkNGRlMTdlZWIyMjNkIiwiYXBwaWQiOiI1Y2JlZDZhYy1hMDgzLTRlMTQtYjE5MS1iNGJhMDc2NTNkZTIiLCJpYXQiOjE3Mzk4ODIwMDJ9.SGQdUBRQjFdeerJCjih5DCNZixwHZ1aomvzssnMo9ZFKkPi4VV7WjEIwOxXD8CKuW_wUyffoP3A_f01FQBcirrhPFfYEsYWBOBiKTg1MNZguSGY0KgNYrQB19KA1EUpLWbArnrvVhtwoTHggAEBWliWDKvINm-UNGueTYLjB-HvMh6LVsgRXlVGkkV-pO41Ppac5Rv5hH9s1myZED0tRiEoneCB05gWR6kqsNdjHWP1tLFlN_wrzR55sEqXS43umKPTiOPTTQcsSm_skmlUsUa00qXqmyOXvo1_A5heu3Ny7yx7W0fkouJ6-3n7HLv_oTdUDbwBW_dhN8-Z0I1aC4g',
-            'Connection': 'keep-alive',
-            'Pragma': 'no-cache',
-            'Cache-Control': 'no-cache'
-        }
+        'accept': 'application/json',
+        'accept-language': 'en-US,en;q=0.9',
+        'appid': '1141147648',
+        'cache-control': 'private',
+        'content-type': 'application/json;odata=verbose',
+        'origin': 'https://onedrive.live.com',
+        'priority': 'u=1, i',
+        'referer': 'https://onedrive.live.com/',
+        'sec-ch-ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Linux"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'cross-site',
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
+        'x-forcecache': '1',
+    }
+
+    params = {
+        'appId': '5cbed6ac-a083-4e14-b191-b4ba07653de2',
+    }
+    auth_token_url = 'https://api-badgerp.svc.ms/v1.0/token'
+    response = get_response(auth_token_url, headers, params, type='post')
+    authorization_badger = response['token']
+
+    print(authorization_badger)
+    time.sleep(2)
+
+    headers = {
+        'accept': 'application/json',
+        'accept-language': 'en-US',
+        'authorization': f'Badger {authorization_badger}',
+        'content-length': '0',
+        'content-type': 'text/plain;charset=UTF-8',
+        'origin': 'https://onedrive.live.com',
+        'prefer': 'autoredeem',
+        'priority': 'u=1, i',
+        'referer': 'https://onedrive.live.com/',
+        'sec-ch-ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Linux"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'cross-site',
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
+    }
+
+    params = {
+        '$select': 'id,parentReference',
+    }
+    url = 'https://my.microsoftpersonalcontent.com/_api/v2.0/shares/u!aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBbC1UNmQtX0VOZjZheHNFYnZoYkVjMmdVRnM/driveitem'
+
+    response = get_response(url, headers, params, type='post2')
+    
+    time.sleep(2)
+
+    headers = {
+        'accept': 'application/json',
+        'accept-language': 'en-US',
+        'application': 'ODC Web',
+        'authorization': f'Badger {authorization_badger}',
+        'origin': 'https://onedrive.live.com',
+        'priority': 'u=1, i',
+        'referer': 'https://onedrive.live.com/',
+        'scenario': 'DownloadFile',
+        'scenariotype': 'AUO',
+        'sec-ch-ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Linux"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'cross-site',
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
+    }
 
     params = {
         'select': 'id,@content.downloadUrl',
     }
 
     url = 'https://my.microsoftpersonalcontent.com/_api/v2.0/drives/FAD710BFDFE9935F/items/FAD710BFDFE9935F!107'
+
     response = get_response(url, headers, params)
+
     download_url = response['@content.downloadUrl'] # From https://1drv.ms/u/s!Al-T6d-_ENf6axsEbvhbEc2gUFs
 
     download_path = 'tmp/fnac2019.zip'
     download_with_curl(download_url, download_path)
+    
+if not os.path.exists(root) and os.path.exists(download_path):
+    print('FNAC2019: Download complete')    
     with zipfile.ZipFile(download_path, 'r') as zip_file:
         zip_output = 'tmp/fnac2019'
         os.makedirs(zip_output, exist_ok=True)
@@ -49,8 +121,8 @@ if not os.path.exists(root):
 
     subsets = ['B', 'M']
 
-    print('FNAC2019: Download complete')    
 
+    morph_params = {'morph_kernel_open': 5, 'morph_kernel_erode': 3, 'morph_iter': 1}
     crop_nr = 0
     total_crop_nr = 0
     patch_size = 50
