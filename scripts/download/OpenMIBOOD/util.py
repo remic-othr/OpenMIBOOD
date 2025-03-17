@@ -9,12 +9,26 @@ import os
 from urllib.request import urlretrieve
 import SimpleITK as sitk
 
-def get_response(url, headers, params):
-    response = requests.get(
+def get_response(url, headers, params, type='get'):
+    if type == 'get':
+        response = requests.get(
+                url,
+                params=params,
+                headers=headers,
+            )
+    elif 'post':
+        response = requests.post(
+            url,
+            json=params,
+            headers=headers,
+        )
+    else:
+        response = requests.post(
             url,
             params=params,
             headers=headers,
         )
+    
     return json.loads(response.content.decode('utf-8'))
 
 def download_with_gdown(id, target):
