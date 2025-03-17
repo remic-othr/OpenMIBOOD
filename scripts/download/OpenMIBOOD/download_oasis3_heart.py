@@ -4,10 +4,12 @@ from tqdm import tqdm
 import shutil
 from util import download_with_gdown
 
-base_path = '../../../data/oasis/far/SegmentationDecathlon'
-tar_path = 'tmp/Task02_Heart.tar'
 
-tar_output = f'tmp/SegmentationDecathlon/Task02_Heart'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_path = f'{script_dir}/../../../data/oasis/far/SegmentationDecathlon'
+tar_path = f'{script_dir}/tmp/Task02_Heart.tar'
+
+tar_output = f'{script_dir}/tmp/SegmentationDecathlon/Task02_Heart'
 print('Downloading Heart data...')
 id = '1wEB2I6S6tQBVEPxir8cA5kFB8gTQadYY'
 download_with_gdown(id, tar_path)

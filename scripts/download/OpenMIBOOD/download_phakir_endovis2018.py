@@ -5,10 +5,11 @@ from tqdm import tqdm
 
 zip_paths = ['Endovis2018_1.zip', 'Endovis2018_2.zip']
 
-base_path = '../../../data/phakir/near/Endovis2018'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_path = f'{script_dir}/../../../data/phakir/near/Endovis2018'
 
 if os.path.exists(zip_paths[0]) and os.path.exists(zip_paths[1]):
-    zip_output = 'tmp/Endovis2018'
+    zip_output = f'{script_dir}/tmp/Endovis2018'
     for zip_path in tqdm(zip_paths, desc='Extracting Endovis2018 data'):
         with zipfile.ZipFile(zip_path, 'r') as zip_file:
             os.makedirs(zip_output, exist_ok=True)

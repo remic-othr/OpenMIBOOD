@@ -5,11 +5,13 @@ import numpy as np
 import nibabel as nib
 from util import get_oasis_data, resample_volume
 
-base_path = '../../../data/oasis'
-zip_path = 'OASIS3.zip'
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_path = f'{script_dir}/../../../data/oasis'
+zip_path = f'{script_dir}/OASIS3.zip'
 
 if os.path.exists(zip_path):
-    zip_output = f'tmp/OASIS3/'
+    zip_output = f'{script_dir}/tmp/OASIS3/'
 
     print('Extracting OASIS3 data. This may take a while ...')
 

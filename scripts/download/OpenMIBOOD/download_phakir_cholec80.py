@@ -2,7 +2,8 @@ import os
 import zipfile
 from util import download_with_curl
 
-zip_path = 'tmp/Cholec80_cropped.zip'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+zip_path = f'{script_dir}/tmp/Cholec80_cropped.zip'
 
 zip_output = '../../../data/phakir/near/'
 print('Downloading Cholec80 data...')

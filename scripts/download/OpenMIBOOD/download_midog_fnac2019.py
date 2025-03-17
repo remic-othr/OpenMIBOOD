@@ -15,7 +15,9 @@ download_path = 'tmp/fnac2019.zip'
 print('If there are any errors with the automatic download, please visit the above link, download the file manually, move it to "tmp/fnac2019.zip", and run this script again.')
 print('##############################################################')
 
-root = '../../../data/midog/far/fnac2019_crops'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+root = f'{script_dir}/../../../data/midog/far/fnac2019_crops'
 download_required = True
 
 if os.path.exists(download_path):
@@ -48,7 +50,6 @@ if download_required:
     response = get_response(auth_token_url, headers, params, type='post')
     authorization_badger = response['token']
 
-    print(authorization_badger)
     time.sleep(2)
 
     headers = {
@@ -108,15 +109,15 @@ if download_required:
 
     download_url = response['@content.downloadUrl'] # From https://1drv.ms/u/s!Al-T6d-_ENf6axsEbvhbEc2gUFs
 
-    download_path = 'tmp/fnac2019.zip'
+    download_path = f'{script_dir}/tmp/fnac2019.zip'
     download_with_curl(download_url, download_path)
     
 if not os.path.exists(root) and os.path.exists(download_path):
     print('FNAC2019: Download complete')    
     with zipfile.ZipFile(download_path, 'r') as zip_file:
-        zip_output = 'tmp/fnac2019'
+        zip_output = f'{script_dir}/tmp/fnac2019'
         os.makedirs(zip_output, exist_ok=True)
-        if not os.path.exists(os.path.join(zip_output, 'wg4bpm33hj-2')):
+        if not os.path.exists(os.path.join(zip_output, 'M')):
             zip_file.extractall(path=zip_output)
 
     subsets = ['B', 'M']

@@ -3,12 +3,13 @@ import zipfile
 from tqdm import tqdm
 import shutil
 
-base_path = '../../../data/oasis/near/BraTS2023-GLI'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_path = f'{script_dir}/../../../data/oasis/near/BraTS2023-GLI'
 
-zip_path = 'ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData.zip'
+zip_path = f'{script_dir}/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData.zip'
 
 if os.path.exists(zip_path):
-    zip_output = f'tmp/BraTS2023-GLI'
+    zip_output = f'{script_dir}/tmp/BraTS2023-GLI'
     print('Extracting BraTS2023 data. This may take a while...')
     
     if not os.path.exists(os.path.join(base_path, 'BraTS-GLI-01666-000')):

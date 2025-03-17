@@ -22,11 +22,11 @@ def extract_number(file_path):
     
     raise ValueError(f"Could not extract number from {file_path}")
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_path = f'{script_dir}/../../../data/oasis/far/CHAOS/NIFTI'
+zip_path = f'{script_dir}/tmp/CHAOS_Test_Sets.zip'
 
-base_path = '../../../data/oasis/far/CHAOS/NIFTI'
-zip_path = 'tmp/CHAOS_Test_Sets.zip'
-
-zip_output = f'tmp/CHAOS'
+zip_output = f'{script_dir}/tmp/CHAOS'
 print('Downloading CHAOS data...')
 url = 'https://zenodo.org/records/3431873/files/CHAOS_Test_Sets.zip?download=1'
 download_with_curl(url, zip_path)

@@ -54,19 +54,20 @@ def get_largest_contour(image):
 
     return largest_contour, largest_area, circularity, contours, largest_contour_ratio
 
-output_base_path = '../../../data/phakir/near/Endovis2015_cropped'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_base_path = f'{script_dir}/../../../data/phakir/near/Endovis2015_cropped'
 
 if not os.path.exists(os.path.join(output_base_path, 'OP4/Raw/')):
     url = 'https://opencas.webarchiv.kit.edu/data/endovis15_ins/Segmentation_Rigid_Training.zip'
-    download_path = 'tmp/Endovis2015.zip'
+    download_path = f'{script_dir}/tmp/Endovis2015.zip'
     download_with_curl(url, download_path)
     with zipfile.ZipFile(download_path, 'r') as zip_file:
-        zip_output = 'tmp/Endovis2015'
+        zip_output = f'{script_dir}/tmp/Endovis2015'
         os.makedirs(zip_output, exist_ok=True)
         if not os.path.exists(os.path.join(zip_output, 'Segmentation_Rigid_Training/Training/OP4')):
             zip_file.extractall(path=zip_output)
 
-base_path = 'tmp/Endovis2015/Segmentation_Rigid_Training/Training/'
+base_path = f'{script_dir}/tmp/Endovis2015/Segmentation_Rigid_Training/Training/'
 
 surgery_list = [f'OP{idx}/Raw/' for idx in range(1, 5)]
 

@@ -65,19 +65,20 @@ print('Downloading 65 GB - this may take a while ...')
 
 domain_split = [('1a', 0, 50, ''), ('1b', 50, 100, 'csid'), ('1c', 100, 150, 'csid'), ('2', 200, 244, 'near'), ('3', 244, 299, 'near'), ('4', 299, 349, 'near'), ('5', 349, 404, 'near'), ('6a', 404, 489, 'near'), ('6b', 489, 504, 'near'), ('7', 504, 553, 'near')]
 
-root = '../../../data/midog/'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+root = f'{script_dir}/../../../data/midog/'
 all_found = True
 for domain in domain_split:
     domain_name = domain[0]
     subfolder = domain[3]
     dir_path = os.path.join(root, subfolder, domain_name)    
     if not os.path.exists(dir_path):
-        print(f'{dir_path} not found')
         all_found = False
         break
 
 if not all_found:
-    download_path = 'tmp/midog'
+    download_path = f'{script_dir}/tmp/midog'
     download_with_figshare(download_lists, download_path)
 
     midog_data = json.load(open(os.path.join(download_path, 'MIDOGpp.json')))    

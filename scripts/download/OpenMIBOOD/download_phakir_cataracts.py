@@ -2,9 +2,10 @@ import os
 import zipfile
 from util import download_with_curl
 
-zip_path = 'tmp/CATARACTS.zip'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+zip_path = f'{script_dir}/tmp/CATARACTS.zip'
 
-zip_output = '../../../data/phakir/far/'
+zip_output = f'{script_dir}/../../../data/phakir/far/'
 print('Downloading CATARACTS data...')
 url = 'https://zenodo.org/records/14924735/files/CATARACTS.zip?download=1'
 download_with_curl(url, zip_path)
