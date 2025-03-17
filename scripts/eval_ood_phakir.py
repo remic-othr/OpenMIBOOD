@@ -36,7 +36,7 @@ if not os.path.exists(root):
 
 ckpt_path = os.path.join(root, 'phakir_classifier.pth')
 if not os.path.exists(ckpt_path):
-    print('Please download the model checkpoint from the associated github release first.')
+    print('Please download the model checkpoint using the provided script "scripts/download/OpenMIBOOD/download_classifiers.py".')
     exit()
 
 # specify an implemented postprocessor
