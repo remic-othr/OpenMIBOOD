@@ -31,6 +31,7 @@ setuptools.setup(
         'Cython>=0.29.30',
         'faiss-gpu>=1.7.2',
         'gdown>=4.7.1',  # 'libmr>=0.1.9'
+        'nnunetv2==2.5.2',
         'hd-bet==2.0.1',
         'nibabel',
         'pydicom',
