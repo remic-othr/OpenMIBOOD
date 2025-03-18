@@ -13,6 +13,7 @@ from openood.postprocessors import BasePostprocessor
 from openood.networks.ash_net import ASHNet
 from openood.networks.react_net import ReactNet
 from openood.networks.scale_net import ScaleNet
+from openood.networks.adascale_net import AdaScaleANet, AdaScaleLNet
 
 from .datasets import DATA_INFO, data_setup, get_id_ood_dataloader
 from .postprocessor import get_postprocessor
@@ -89,7 +90,7 @@ class Evaluator:
         # set up config root
         if config_root is None:
             filepath = os.path.dirname(os.path.abspath(__file__))
-            config_root = os.path.join(*filepath.split('/')[:-2], 'configs')
+            config_root = os.path.join('/', *filepath.split('/')[:-2], 'configs')
 
         # get postprocessor
         if postprocessor is None:
@@ -117,6 +118,10 @@ class Evaluator:
             net = ASHNet(net)
         elif postprocessor_name == 'scale':
             net = ScaleNet(net)
+        elif postprocessor_name == 'adascale_a':
+            net = AdaScaleANet(net)
+        elif postprocessor_name == 'adascale_l':
+            net = AdaScaleLNet(net)
 
         # postprocessor setup
         postprocessor.setup(net, dataloader_dict['id'], dataloader_dict['ood'])

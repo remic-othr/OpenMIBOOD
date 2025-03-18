@@ -1,3 +1,4 @@
+from .nci_postprocessor import NCIPostprocessor
 from .fdbd_postprocessor import fDBDPostprocessor
 from .ash_postprocessor import ASHPostprocessor
 from .base_postprocessor import BasePostprocessor
@@ -24,6 +25,7 @@ from .mds_ensemble_postprocessor import MDSEnsemblePostprocessor
 from .mos_postprocessor import MOSPostprocessor
 from .npos_postprocessor import NPOSPostprocessor
 from .odin_postprocessor import ODINPostprocessor
+from .iodin_postprocessor import IODINPostprocessor
 from .opengan_postprocessor import OpenGanPostprocessor
 from .openmax_postprocessor import OpenMax
 from .patchcore_postprocessor import PatchcorePostprocessor
@@ -44,3 +46,4 @@ from .nnguide_postprocessor import NNGuidePostprocessor
 from .relation_postprocessor import RelationPostprocessor
 from .t2fnorm_postprocessor import T2FNormPostprocessor
 from .reweightood_postprocessor import ReweightOODPostprocessor
+from .adascale_postprocessor import AdaScalePostprocessor
