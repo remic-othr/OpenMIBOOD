@@ -37,7 +37,8 @@ setuptools.setup(
         'pydicom',
         'libmr>=0.1.9',
         'torchio>=0.18.0',
-        'monai>=0.7.0'
+        'monai>=0.7.0',
+        'statsmodels' # Adascale_postprocessor
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
