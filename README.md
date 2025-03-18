@@ -24,7 +24,7 @@ This part lists all benchmarks and their associated dataset structure.
 >      > ID: `Video 01 – 05`, `Video 07`; (without frames containing smoke) <br>
 >      > cs-ID: `Video 01 – 05`, `Video 07`; (only frames containing smoke); <br>
 >      > near-OOD: [`Cholec80`](https://doi.org/10.1109/TMI.2016.2593957), [`EndoSeg15`](https://doi.org/10.48550/arXiv.1805.02475), [`EndoSeg18`](https://doi.org/10.48550/arXiv.2001.11190);<br>
->      > Far-OOD: [`Kvasir-SEG`](https://doi.org/10.1007/978-3-030-37734-2_37), [`CATARACTS`](https://doi.org/10.1016/j.media.2018.11.008);<br>
+>      > far-OOD: [`Kvasir-SEG`](https://doi.org/10.1007/978-3-030-37734-2_37), [`CATARACTS`](https://doi.org/10.1016/j.media.2018.11.008);<br>
 > - [x] [OASIS-3](https://sites.wustl.edu/oasisbrains/home/oasis-3/)
 >      > ID: `T1-weighted MRI`; (without scans from Siemens MAGNETOM Vision devices)<br>
 >      > cs-ID: `T2-weighted MRI`, `T1-weighted MRI` (only scans from Siemens MAGNETOM Vision devices);<br>
