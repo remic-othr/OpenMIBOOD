@@ -5,7 +5,7 @@ from util import download_with_curl
 script_dir = os.path.dirname(os.path.abspath(__file__))
 zip_path = f'{script_dir}/tmp/Cholec80_cropped.zip'
 
-zip_output = '../../../data/phakir/near/'
+zip_output = f'{script_dir}/../../../data/phakir/near/'
 print('Downloading Cholec80 data...')
 url = 'https://zenodo.org/records/14921670/files/Cholec80_cropped.zip?download=1'
 download_with_curl(url, zip_path)
