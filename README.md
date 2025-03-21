@@ -1,6 +1,6 @@
 # OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection
 
-| :exclamation: If you use OpenMIBOOD in your research, please cite the [OpenMIBOOD](TODO) benchmark along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked.|
+| :exclamation: If you use OpenMIBOOD in your research, please cite the [OpenMIBOOD](https://arxiv.org/abs/2503.16247) benchmark along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked.|
 |-----------------------------------------|
 
 ![Summary of all utilized medical datasets, separated into ID, cs-ID, near-OOD, and far-OOD and their corresponding underlying domain shifts.](Datasets_Summary.jpg)
@@ -32,7 +32,7 @@ This part lists all benchmarks and their associated dataset structure.
 >      > far-OOD: [`MSD-H`](https://doi.org/10.1109/TMI.2015.2398818), [`CHAOS`](https://doi.org/10.1016/j.media.2020.101950);<br>
 </details>
 
-The three Medical Imaging Benchmarks from OpenMIBOOD (TODO) were evaluated using the following 24 post-hoc methods. 
+The three Medical Imaging Benchmarks from [OpenMIBOOD](https://arxiv.org/abs/2503.16247) were evaluated using the following 24 post-hoc methods. 
 While other postprocessors contained in this repository may also be compatible with these benchmarks, they have not been tested yet.
 
 The evaluated methods include: [`ASH`](https://doi.org/10.48550/arXiv.2209.09858), [`DICE`](https://doi.org/10.1007%2F978-3-031-20053-3_40), [`Dropout`](https://proceedings.mlr.press/v48/gal16.html), [`EBO`](https://proceedings.neurips.cc/paper/2020/hash/f5496252609c43eb8a3d147ab9b9c006-Abstract.html), [`fDBD`](https://doi.org/10.48550/arXiv.2312.11536), [`GEN`](https://openaccess.thecvf.com/content/CVPR2023/html/Liu_GEN_Pushing_the_Limits_of_Softmax-Based_Out-of-Distribution_Detection_CVPR_2023_paper.html), [`KLM`](https://arxiv.org/abs/1911.11132v1), [`KNN`](https://proceedings.mlr.press/v162/sun22d.html), [`MDS`](https://proceedings.neurips.cc/paper/2018/hash/abdeb6f575ac5c6676b747bca8d09cc2-Abstract.html), [`MDS Ensemble`](https://proceedings.neurips.cc/paper/2018/hash/abdeb6f575ac5c6676b747bca8d09cc2-Abstract.html), [`MLS`](https://arxiv.org/abs/1911.11132v4), [`MSP`](https://doi.org/10.48550/arXiv.1610.02136), [`NNGuide`](https://openaccess.thecvf.com/content/ICCV2023/html/Park_Nearest_Neighbor_Guidance_for_Out-of-Distribution_Detection_ICCV_2023_paper.html), [`ODIN`](https://arxiv.org/abs/1706.02690v5), [`OpenMax`](https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Bendale_Towards_Open_Set_CVPR_2016_paper.html), [`RankFeat`](https://proceedings.neurips.cc/paper_files/paper/2022/hash/71c9eb0913e6c7fda3afd69c914b1a0c-Abstract-Conference.html), [`ReACT`](https://proceedings.neurips.cc/paper/2021/hash/01894d6f048493d2cacde3c579c315a3-Abstract.html), [`Relation`](https://proceedings.neurips.cc/paper_files/paper/2023/hash/886ed40d7882c9f891824e42a452c228-Abstract-Conference.html), [`Residual`](https://doi.org/10.48550/arXiv.2203.10807), [`RMDS`](https://doi.org/10.48550/arXiv.2106.09022), [`SCALE`](https://openreview.net/forum?id=RDSTjtnqCg), [`SHE`](https://openreview.net/forum?id=KkazG4lgKL), [`TempScale`](https://proceedings.mlr.press/v70/guo17a.html), [`ViM`](https://doi.org/10.48550/arXiv.2203.10807).
@@ -61,7 +61,7 @@ For each dataset, a corresponding script is provided under [`scripts/download/Op
 
 ## Updates
 - **14 Mar, 2025**: Repository corresponding to OpenMIBOOD released on github.
-- **26 Feb, 2025**: OpenMIBOOD full paper is accepted at the CVPR 2025 conference. Check the report [here](TODO).
+- **26 Feb, 2025**: OpenMIBOOD full paper is accepted at the CVPR 2025 conference. Check the report [here](https://arxiv.org/abs/2503.16247).
 
 ## Contributing
 We appreciate all contributions to improve OpenMIBOOD.
