@@ -32,6 +32,10 @@ This part lists all benchmarks and their associated dataset structure.
 >      > far-OOD: [`MSD-H`](https://doi.org/10.1109/TMI.2015.2398818), [`CHAOS`](https://doi.org/10.1016/j.media.2020.101950);<br>
 </details>
 
+| :exclamation: The PhaKIR dataset is not yet publicly available (expected release: early summer).
+Until then, we offer to evaluate post-hoc methods for this benchmark and provide the results.|
+|-----------------------------------------|
+
 The three Medical Imaging Benchmarks from [OpenMIBOOD](https://arxiv.org/abs/2503.16247) were evaluated using the following 24 post-hoc methods. 
 While other postprocessors contained in this repository may also be compatible with these benchmarks, they have not been tested yet.
 
