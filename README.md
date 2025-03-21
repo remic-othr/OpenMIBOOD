@@ -1,6 +1,6 @@
 # OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection
 
-| :exclamation: If you use OpenMIBOOD in your research, please cite the [OpenMIBOOD](https://arxiv.org/abs/2503.16247) benchmark along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked.|
+| :exclamation: If you use OpenMIBOOD in your research, please cite our paper [OpenMIBOOD](https://arxiv.org/abs/2503.16247) along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked.|
 |-----------------------------------------|
 
 ![Summary of all utilized medical datasets, separated into ID, cs-ID, near-OOD, and far-OOD and their corresponding underlying domain shifts.](Datasets_Summary.jpg)
