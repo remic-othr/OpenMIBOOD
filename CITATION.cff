@@ -24,6 +24,7 @@ preferred-citation:
   - family-names: Palm
     given-names: Christoph
   conference: "Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)"
+  journal: "Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)"
   month: 6
   start: 25874
   end: 25886
