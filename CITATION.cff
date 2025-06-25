@@ -1,4 +1,3 @@
-# OpenMIBOOD
 @InProceedings{gutbrod2025openmibood,
   author    = {Gutbrod, Max and Rauber, David and Nunes, Danilo Weber and Palm, Christoph},
   title     = {OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection},
