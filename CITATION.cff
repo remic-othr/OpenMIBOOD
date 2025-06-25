@@ -1,7 +1,20 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection"
 authors:
+- family-names: Gutbrod
+  given-names: Max
+- family-names: Rauber
+  given-names: David
+- family-names: Nunes
+  given-names: Danilo Weber
+- family-names: Palm
+  given-names: Christoph
+title: "OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection"
+version: 1.0
+date-released: 2025-06-11
+preferred-citation:
+  type: conference-paper
+  authors:
   - family-names: Gutbrod
     given-names: Max
   - family-names: Rauber
@@ -10,7 +23,9 @@ authors:
     given-names: Danilo Weber
   - family-names: Palm
     given-names: Christoph
-date-released: 2025-06-11
-conference: "Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)"
-pages: 25874-25886
-type: conference-paper
+  conference: "Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)"
+  month: 6
+  start: 25874
+  end: 25886
+  title: "OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection"
+  year: 2025
