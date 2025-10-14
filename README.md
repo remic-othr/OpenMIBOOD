@@ -32,7 +32,7 @@ This part lists all benchmarks and their associated dataset structure.
 >      > far-OOD: [`MSD-H`](https://doi.org/10.1109/TMI.2015.2398818), [`CHAOS`](https://doi.org/10.1016/j.media.2020.101950);<br>
 </details>
 
-| :exclamation: The PhaKIR dataset is not yet publicly available (expected release: early summer). Until then, we offer to evaluate post-hoc methods for this benchmark and provide the results.|
+| :exclamation: The PhaKIR dataset is not yet publicly available (expected release: hopefully 2025). Until then, we offer to evaluate post-hoc methods for this benchmark and provide the results.|
 |-----------------------------------------|
 
 The three Medical Imaging Benchmarks from [OpenMIBOOD](https://openaccess.thecvf.com/content/CVPR2025/html/Gutbrod_OpenMIBOOD_Open_Medical_Imaging_Benchmarks_for_Out-Of-Distribution_Detection_CVPR_2025_paper.html) were evaluated using the following 24 post-hoc methods. 
