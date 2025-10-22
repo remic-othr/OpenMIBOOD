@@ -10,24 +10,10 @@ from copy import deepcopy
 from .base_postprocessor import BasePostprocessor
 
 normalizer = lambda x: x / np.linalg.norm(x, axis=-1, keepdims=True) + 1e-10
-
-
-def knn_score(bankfeas, queryfeas, k=100, min=False):
-
-    bankfeas = deepcopy(np.array(bankfeas))
-    queryfeas = deepcopy(np.array(queryfeas))
-
-    index = faiss.IndexFlatIP(bankfeas.shape[-1])
-    index.add(bankfeas)
-    D, _ = index.search(queryfeas, k)
-    if min:
-        scores = np.array(D.min(axis=1))
-    else:
-        scores = np.array(D.mean(axis=1))
-    return scores
-
+    
 
 class NNGuidePostprocessor(BasePostprocessor):
+
     def __init__(self, config):
         super(NNGuidePostprocessor, self).__init__(config)
         self.args = self.config.postprocessor.postprocessor_args
@@ -53,28 +39,50 @@ class NNGuidePostprocessor(BasePostprocessor):
                     logit, feature = net(data, return_feature=True)
                     bank_feas.append(normalizer(feature.data.cpu().numpy()))
                     bank_logits.append(logit.data.cpu().numpy())
+                    
                     if len(bank_feas
                            ) * id_loader_dict['train'].batch_size > int(
                                len(id_loader_dict['train'].dataset) *
                                self.alpha):
                         break
+            self.all_bank_feas = np.concatenate(bank_feas, axis=0)
+            self.all_bank_logits = np.concatenate(bank_logits, axis=0)
 
-            bank_feas = np.concatenate(bank_feas, axis=0)
-            bank_confs = logsumexp(np.concatenate(bank_logits, axis=0),
-                                   axis=-1)
-            self.bank_guide = bank_feas * bank_confs[:, None]
+            self.update_internals()
 
             self.setup_flag = True
         else:
             pass
+
+    def update_internals(self):
+        num_samples = int(len(self.all_bank_feas) * self.alpha)
+        indices = np.random.choice(len(self.all_bank_feas), num_samples, replace=False)
+        
+        self.bank_confs = logsumexp(self.all_bank_logits[indices], axis=-1)
+        bank_guide = self.all_bank_feas[indices] * self.bank_confs[:, None]
+        self.index = faiss.IndexFlatIP(bank_guide.shape[-1])
+        self.index.add(bank_guide)
+    
+    def knn_score(self, queryfeas, min=False):
+        D, indices = self.index.search(queryfeas, self.K)
+        valid_mask = indices != -1
+        # Create a mask for valid distances
+        valid_distances = np.where(valid_mask, D, np.nan)
+        
+        if min:
+            scores = np.nanmin(valid_distances, axis=1)
+        else:
+            scores = np.nanmean(valid_distances, axis=1)
+        
+        return scores
 
     @torch.no_grad()
     def postprocess(self, net: nn.Module, data: Any):
         logit, feature = net(data, return_feature=True)
         feas_norm = normalizer(feature.data.cpu().numpy())
         energy = logsumexp(logit.data.cpu().numpy(), axis=-1)
-
-        conf = knn_score(self.bank_guide, feas_norm, k=self.K)
+    
+        conf = self.knn_score(feas_norm)
         score = conf * energy
 
         _, pred = torch.max(torch.softmax(logit, dim=1), dim=1)
@@ -83,6 +91,7 @@ class NNGuidePostprocessor(BasePostprocessor):
     def set_hyperparam(self, hyperparam: list):
         self.K = hyperparam[0]
         self.alpha = hyperparam[1]
+        self.update_internals()
 
     def get_hyperparam(self):
         return [self.K, self.alpha]

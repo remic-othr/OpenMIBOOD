@@ -88,7 +88,7 @@ preprocessor = trn.Compose([
     ToFloat(),
     tio.ZNormalization()
 ])
-#NAECHSTE SCHRITTE: NEUEN CLEANEN CONTAINER ANLEGEN - IN DEM CONTAINER DANN OPENOOD INSTALLIEREN UND NOCHMAL LAUFEN LASSEN
+
 net.cuda()
 net.eval()
 # a unified evaluator

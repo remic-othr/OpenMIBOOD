@@ -30,7 +30,7 @@ fsood = True
 
 root = os.path.join(
     ROOT_DIR, 'results',
-    f'midog')
+    f'phakir')
 if not os.path.exists(root):
     os.makedirs(root)
 
@@ -67,7 +67,7 @@ preprocessor = trn.Compose([
     trn.Normalize(mean=[0.712, 0.496, 0.756],
                     std=[0.167, 0.167, 0.110])
 ])
-#NAECHSTE SCHRITTE: NEUEN CLEANEN CONTAINER ANLEGEN - IN DEM CONTAINER DANN OPENOOD INSTALLIEREN UND NOCHMAL LAUFEN LASSEN
+
 net.cuda()
 net.eval()
 # a unified evaluator
