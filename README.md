@@ -1,6 +1,6 @@
 # OpenMIBOOD: Open Medical Imaging Benchmarks for Out-Of-Distribution Detection
 
-| :exclamation: If you use OpenMIBOOD in your research, please cite our paper [OpenMIBOOD](https://openaccess.thecvf.com/content/CVPR2025/html/Gutbrod_OpenMIBOOD_Open_Medical_Imaging_Benchmarks_for_Out-Of-Distribution_Detection_CVPR_2025_paper.html) along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked.|
+| :exclamation: If you use OpenMIBOOD in your research, please cite our paper [OpenMIBOOD](https://openaccess.thecvf.com/content/CVPR2025/html/Gutbrod_OpenMIBOOD_Open_Medical_Imaging_Benchmarks_for_Out-Of-Distribution_Detection_CVPR_2025_paper.html) along with both [OpenOOD](https://github.com/Jingkang50/OpenOOD) benchmarks (versions 1 and 1.5), from which this evaluation framework is forked. Our arXiv version with the latest results can be found [here](https://arxiv.org/abs/2503.16247).|
 |-----------------------------------------|
 
 ![Summary of all utilized medical datasets, separated into ID, cs-ID, near-OOD, and far-OOD and their corresponding underlying domain shifts.](Datasets_Summary.jpg)
@@ -65,6 +65,7 @@ For each dataset, a corresponding script is provided under [`scripts/download/Op
 | CHAOS | https://doi.org/10.1016/j.media.2020.101950 |  https://chaos.grand-challenge.org/Combined_Healthy_Abdominal_Organ_Segmentation/,   https://doi.org/10.5281/zenodo.3362844   | 
 
 ## Updates
+- **23 Oct, 2025**: Due to bugs identified in the NNGuide and ViM postprocessors, we have re-run the experiments and updated our [paper on arXiv](https://arxiv.org/abs/2503.16247). As a result, ViM’s ranking changed from 2nd to 4th.
 - **14 Mar, 2025**: Repository corresponding to OpenMIBOOD released on github.
 - **26 Feb, 2025**: OpenMIBOOD full paper is accepted at the CVPR 2025 conference. Check the report [here](https://openaccess.thecvf.com/content/CVPR2025/html/Gutbrod_OpenMIBOOD_Open_Medical_Imaging_Benchmarks_for_Out-Of-Distribution_Detection_CVPR_2025_paper.html).
 
