@@ -55,17 +55,16 @@ else:
 # assuming the model is either
 # 1) torchvision pre-trained; or
 # 2) a specified checkpoint    
-net = ResNet50(num_classes=3)
+net = ResNet18_224x224(num_classes=7)
 
 ckpt = torch.load(ckpt_path, map_location='cpu')
 net.load_state_dict(ckpt)
 
 preprocessor = trn.Compose([
-    trn.Resize(50),
-    trn.CenterCrop(50),
+    trn.Resize((360,640)),
     trn.ToTensor(),
-    trn.Normalize(mean=[0.712, 0.496, 0.756],
-                    std=[0.167, 0.167, 0.110])
+    trn.Normalize(mean=[0.517, 0.361, 0.336],
+                    std=[0.166, 0.143, 0.137])
 ])
 
 net.cuda()
@@ -73,7 +72,7 @@ net.eval()
 # a unified evaluator
 evaluator = Evaluator(
     net,
-    id_name='midog',  # the target ID dataset
+    id_name='phakir',  # the target ID dataset
     data_root=os.path.join(ROOT_DIR, 'data'),
     config_root=os.path.join(ROOT_DIR, 'configs'),
     preprocessor=preprocessor,  # default preprocessing

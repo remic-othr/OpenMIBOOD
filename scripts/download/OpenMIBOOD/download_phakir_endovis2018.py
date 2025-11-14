@@ -15,12 +15,18 @@ if os.path.exists(zip_paths[0]) and os.path.exists(zip_paths[1]):
             os.makedirs(zip_output, exist_ok=True)
             zip_file.extractall(path=zip_output)
     
-    sequences = ['seq_1', 'seq_2', 'seq_3', 'seq_4']
-    for sequence in tqdm(sequences, desc='Copying Endovis2018 data'):
-        output_path = os.path.join(base_path, sequence)
-        input_path = os.path.join(zip_output, 'test_data', sequence, 'left_frames')
+        sequences = ['seq_1', 'seq_2', 'seq_3', 'seq_4']
+        for sequence in tqdm(sequences, desc='Copying Endovis2018 data'):
+            output_path = os.path.join(base_path, sequence, 'left_frames')
+            input_path = os.path.join(zip_output, 'test_data', sequence, 'left_frames')
 
-        shutil.copytree(input_path, output_path)
+            shutil.copytree(input_path, output_path, dirs_exist_ok=True)
+        # For an unknown reason, the seq_2/left_frames/frame249.png is missing now from the publicly downloadable files. 
+        # We will try to contact the dataset authors to fix this issue.
+        # However, as frame248 and frame249 are almost identical, we just duplicate frame248 as frame249 here
+        if not os.path.exists(os.path.join(base_path, 'seq_2', 'left_frames', 'frame249.png')):
+            shutil.copyfile(os.path.join(base_path, 'seq_2', 'left_frames', 'frame248.png'),
+                            os.path.join(base_path, 'seq_2', 'left_frames', 'frame249.png'))
     
     print('Endovis2018: Processing complete')
 else:                                                                    
