@@ -8,6 +8,9 @@
 | :exclamation: The table below lists all medical imaging datasets used in this framework. Each used dataset must be cited at a minimum. However, ensure compliance with its specific citation requirements to properly acknowledge the researchers' contributions.|
 |-----------------------------------------|
 
+| :exclamation: The PhaKIR dataset is publicly available. In order to access the dataset, visit [Zenodo](https://zenodo.org/records/16753919), register an account, and request dataset access.|
+|-----------------------------------------|
+
 ---
 ## Supported Medical Imaging Benchmarks (3)
 This part lists all benchmarks and their associated dataset structure.
