@@ -53,6 +53,30 @@ def download_with_curl(url, target):
             with path.open("wb") as f:
                 shutil.copyfileobj(r_raw, f)
 
+def download_with_requests(url, target):
+    import os, pathlib, requests, shutil
+    from tqdm import tqdm
+
+    path = pathlib.Path(target).expanduser().resolve()
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with requests.get(url, stream=True, allow_redirects=True) as r:
+        r.raise_for_status()
+
+        total = int(r.headers.get("Content-Length", 0))
+        desc = "Downloading" if total else "Downloading (unknown size)"
+
+        with open(path, "wb") as f, tqdm(
+            total=total,
+            unit="B",
+            unit_scale=True,
+            desc=desc,
+        ) as pbar:
+            for chunk in r.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    f.write(chunk)
+                    pbar.update(len(chunk))
+
 def download_with_figshare(identifier_dict, target):
     os.makedirs(target, exist_ok=True)
 
