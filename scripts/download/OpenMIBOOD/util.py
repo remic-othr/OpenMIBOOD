@@ -54,9 +54,6 @@ def download_with_curl(url, target):
                 shutil.copyfileobj(r_raw, f)
 
 def download_with_requests(url, target):
-    import os, pathlib, requests, shutil
-    from tqdm import tqdm
-
     path = pathlib.Path(target).expanduser().resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
 
