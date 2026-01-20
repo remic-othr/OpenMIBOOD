@@ -1,4 +1,4 @@
-from util import download_with_curl, validate_patch
+from util import download_with_requests, validate_patch
 import zipfile
 import os
 import json
@@ -12,9 +12,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 root = f'{script_dir}/../../../data/midog/far/ccagt_crops'
 
 if not os.path.exists(root):
-    url = 'https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/wg4bpm33hj-2.zip'
+    url = 'https://data.mendeley.com/public-api/zip/wg4bpm33hj/download/2'
     download_path = f'{script_dir}/tmp/ccagt.zip'
-    download_with_curl(url, download_path)
+    download_with_requests(url, download_path)
     with zipfile.ZipFile(download_path, 'r') as zip_file:
         zip_output = f'{script_dir}/tmp/ccagt'
         os.makedirs(zip_output, exist_ok=True)
