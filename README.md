@@ -23,7 +23,7 @@ This part lists all benchmarks and their associated dataset structure.
 >      > cs-ID: `Domain 1b`, `Domain 1c`;<br>
 >      > near-OOD: `Domain 2`, `Domain 3`, `Domain 4`, `Domain 4`, `Domain 5`, `Domain 6a`, `Domain 6b`, `Domain 7`;<br>
 >      > far-OOD: [`CCAgT`](https://doi.org/10.1016/j.compmedimag.2021.101934), [`FNAC2019`](https://doi.org/10.1016/j.tice.2019.02.001);
-> - [x] [PhaKIR](https://arxiv.org/abs/2507.16559)
+> - [x] [PhaKIR](https://doi.org/10.1016/j.media.2026.103945)
 >      > ID: `Video 01 – 05`, `Video 07`; (without frames containing smoke) <br>
 >      > cs-ID: `Video 01 – 05`, `Video 07`; (only frames containing smoke); <br>
 >      > near-OOD: [`Cholec80`](https://doi.org/10.1109/TMI.2016.2593957), [`EndoSeg15`](https://doi.org/10.48550/arXiv.1805.02475), [`EndoSeg18`](https://doi.org/10.48550/arXiv.2001.11190);<br>
@@ -54,7 +54,7 @@ For each dataset, a corresponding script is provided under [`scripts/download/Op
 | MIDOG | https://doi.org/10.1038/s41597-023-02327-4 | https://github.com/DeepMicroscopy/MIDOGpp |
 | CCAgT | [https://doi.org/10.1016/j.compmedimag.2021.101934](https://doi.org/10.1016/j.compmedimag.2021.101934), https://doi.org/10.1109/CBMS49503.2020.00110 | https://github.com/johnnv1/CCAgT-utils |
 | FNAC 2019 | https://doi.org/10.1016/j.tice.2019.02.001 | https://1drv.ms/u/s!Al-T6d-\_ENf6axsEbvhbEc2gUFs |
-| PhaKIR | https://arxiv.org/abs/2507.16559 [Smoke Annotations](https://opus4.kobv.de/opus4-oth-regensburg/home/index/language/language/en/rmodule/frontdoor/rcontroller/index/raction/index/docId/6080) | https://phakir.re-mic.de/  |
+| PhaKIR | https://doi.org/10.1016/j.media.2026.103945 [Smoke Annotations](https://opus4.kobv.de/opus4-oth-regensburg/home/index/language/language/en/rmodule/frontdoor/rcontroller/index/raction/index/docId/6080) | https://phakir.re-mic.de/  |
 | Cholec80 | https://doi.org/10.1109/TMI.2016.2593957 | [Cropped single instrument frames from Cholec80](https://doi.org/10.5281/zenodo.14921670), [https://camma.unistra.fr/datasets/](https://camma.unistra.fr/datasets/) |
 | EndoSeg15 | https://doi.org/10.48550/arXiv.1805.02475 | https://endovissub-instrument.grand-challenge.org/ |
 | EndoSeg18 | https://doi.org/10.48550/arXiv.2001.11190 | https://endovissub2018-roboticscenesegmentation.grand-challenge.org/ |
@@ -67,6 +67,7 @@ For each dataset, a corresponding script is provided under [`scripts/download/Op
 | CHAOS | https://doi.org/10.1016/j.media.2020.101950 |  https://chaos.grand-challenge.org/Combined_Healthy_Abdominal_Organ_Segmentation/,   https://doi.org/10.5281/zenodo.3362844   | 
 
 ## Updates
+- **11 Nov, 2025**: PhaKIR dataset is publicly available via Zenodo.
 - **23 Oct, 2025**: Due to bugs identified in the NNGuide and ViM postprocessors, we have re-run the experiments and updated our [paper on arXiv](https://arxiv.org/abs/2503.16247). As a result, ViM’s ranking changed from 2nd to 4th.
 - **14 Mar, 2025**: Repository corresponding to OpenMIBOOD released on github.
 - **26 Feb, 2025**: OpenMIBOOD full paper is accepted at the CVPR 2025 conference. Check the report [here](https://openaccess.thecvf.com/content/CVPR2025/html/Gutbrod_OpenMIBOOD_Open_Medical_Imaging_Benchmarks_for_Out-Of-Distribution_Detection_CVPR_2025_paper.html).
