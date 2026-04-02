@@ -81,7 +81,7 @@ def download_with_figshare(identifier_dict, target):
         filename = identifier_dict[file]
         target_path = os.path.join(target, filename)
         if not os.path.exists(target_path):
-            url = f'https://figshare.com/ndownloader/files/{file}'
+            url = f'https://ndownloader.figshare.com/files/{file}'
             urlretrieve(url, target_path)
 
 def validate_patch(img_dims, annotations, additional_bbox):
