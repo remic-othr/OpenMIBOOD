@@ -16,7 +16,8 @@ from openood.postprocessors import (
     RMDSPostprocessor, SHEPostprocessor, CIDERPostprocessor, NPOSPostprocessor,
     GENPostprocessor, NNGuidePostprocessor, RelationPostprocessor,
     T2FNormPostprocessor, ReweightOODPostprocessor, fDBDPostprocessor,
-    AdaScalePostprocessor, IODINPostprocessor, NCIPostprocessor)
+    AdaScalePostprocessor, IODINPostprocessor, NCIPostprocessor,
+    MDS_MFSPostprocessor, MDSPP_MFSPostprocessor, KNN_MFSPostprocessor)
 from openood.utils.config import Config, merge_configs
 
 postprocessors = {
@@ -69,6 +70,9 @@ postprocessors = {
     'reweightood': ReweightOODPostprocessor,
     'adascale_a': AdaScalePostprocessor,
     'adascale_l': AdaScalePostprocessor,
+    'mds_mfs': MDS_MFSPostprocessor,
+    'mdspp_mfs': MDSPP_MFSPostprocessor,
+    'knn_mfs': KNN_MFSPostprocessor
 }
 
 link_prefix = 'https://raw.githubusercontent.com/Jingkang50/OpenOOD/main/configs/postprocessors/'

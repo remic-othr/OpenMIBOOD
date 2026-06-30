@@ -49,7 +49,11 @@ DATA_INFO = {
         'ood': {
             'val': {
                 'data_dir': 'midog/',
-                'imglist_path': 'benchmark_imglist/midog/valid_midog_near.txt'
+                'imglist_path': 'benchmark_imglist/midog/valid_midog_far.txt'
+            },
+            'val_proxy': {
+                'data_dir': 'images_classic/',
+                'imglist_path': 'benchmark_imglist/cifar10/val_tin.txt'
             },
             'near': {
                 'datasets': ['midog_2', 'midog_3', 'midog_4', 'midog_5', 'midog_6a', 'midog_6b', 'midog_7'],
@@ -125,7 +129,11 @@ DATA_INFO = {
         'ood': {
             'val': {
                 'data_dir': 'phakir/',
-                'imglist_path': 'benchmark_imglist/phakir/valid_phakir_near.txt'
+                'imglist_path': 'benchmark_imglist/phakir/valid_phakir_far.txt'
+            },
+            'val_proxy': {
+                'data_dir': 'images_classic/',
+                'imglist_path': 'benchmark_imglist/cifar10/val_tin.txt'
             },
             'near': {
                 'datasets': ['phakir_cholec', 'phakir_endovis2015', 'phakir_endovis2018'],
@@ -189,7 +197,11 @@ DATA_INFO = {
         'ood': {
             'val': {
                 'data_dir': 'oasis/',
-                'imglist_path': 'benchmark_imglist/oasis3/valid_oasis3_near.txt'
+                'imglist_path': 'benchmark_imglist/oasis3/valid_oasis3_far.txt'
+            },
+            'val_proxy': {
+                'data_dir': 'oasis/',
+                'imglist_path': 'benchmark_imglist/oasis3/full_luna16.txt'
             },
             'near': {
                 'datasets': ['oasis3_atlas', 'oasis3_brats', 'oasis3_ct'],
@@ -250,6 +262,10 @@ DATA_INFO = {
             'val': {
                 'data_dir': 'images_classic/',
                 'imglist_path': 'benchmark_imglist/cifar10/val_tin.txt'
+            },
+            'val_proxy': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/valid_phakir.txt'
             },
             'near': {
                 'datasets': ['cifar100', 'tin'],
@@ -476,6 +492,10 @@ DATA_INFO = {
                 'imglist_path':
                 'benchmark_imglist/imagenet/val_openimage_o.txt'
             },
+            'val_proxy': {
+                'data_dir': 'phakir/',
+                'imglist_path': 'benchmark_imglist/phakir/valid_phakir.txt'
+            },
             'near': {
                 'datasets': ['ssb_hard', 'ninco'],
                 'ssb_hard': {
@@ -697,6 +717,17 @@ def get_id_ood_dataloader(id_name, data_root, preprocessor, **loader_kwargs):
 
         if split == 'val':
             # validation set
+            dataset = ImglistDataset(
+                name='_'.join((id_name, 'ood', split)),
+                imglist_pth=os.path.join(data_root,
+                                         split_config['imglist_path']),
+                data_dir=os.path.join(data_root, split_config['data_dir']),
+                num_classes=data_info['num_classes'],
+                preprocessor=preprocessor,
+                data_aux_preprocessor=test_standard_preprocessor)
+            dataloader = DataLoader(dataset, **loader_kwargs)
+            dataloader_dict['ood'][split] = dataloader
+        elif split == 'val_proxy':
             dataset = ImglistDataset(
                 name='_'.join((id_name, 'ood', split)),
                 imglist_pth=os.path.join(data_root,

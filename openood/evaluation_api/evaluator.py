@@ -33,6 +33,7 @@ class Evaluator:
         batch_size: int = 200,
         shuffle: bool = False,
         num_workers: int = 4,
+        seed: int = 42
     ) -> None:
         """A unified, easy-to-use API for evaluating (most) discriminative OOD
         detection methods.
@@ -102,6 +103,7 @@ class Evaluator:
                 'postprocessor should inherit BasePostprocessor in OpenOOD')
 
         # load data
+        postprocessor.seed = seed
         data_setup(data_root, id_name)
         loader_kwargs = {
             'batch_size': batch_size,

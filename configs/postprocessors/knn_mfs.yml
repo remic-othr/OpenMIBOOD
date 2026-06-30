@@ -1,0 +1,19 @@
+postprocessor:
+  name: knn_mfs
+  APS_mode: True
+  postprocessor_args:
+    K: 3
+    percentage: 0.01
+  postprocessor_sweep:
+    #K_list: [1, 2, 5, 10, 25, 50, 100, 200, 500, 750, 1000]
+    # K_list: [3, 5, 10, 25, 50, 100, 200, 500, 750, 1000]
+    K_list: [3, 5, 10, 25, 50, 100, 200, 500, 750, 1000]
+    # K_list: [200]
+    # K_list: [3]
+    # K_list: [25]
+    #K_list: [500]
+    #K_list: [3]
+    percentage_list: [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    # percentage_list: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    # percentage_list: [0.1]
+  hyperparam_search_done: True

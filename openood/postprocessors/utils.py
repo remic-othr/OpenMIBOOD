@@ -43,6 +43,9 @@ from .vim_postprocessor import VIMPostprocessor
 from .rts_postprocessor import RTSPostprocessor
 from .gen_postprocessor import GENPostprocessor
 from .relation_postprocessor import RelationPostprocessor
+from .mds_mfs_postprocessor import MDS_MFSPostprocessor
+from .mdspp_mfs_postprocessor import MDSPP_MFSPostprocessor
+from .knn_mfs_postprocessor import KNN_MFSPostprocessor
 
 
 def get_postprocessor(config: Config):
@@ -90,6 +93,9 @@ def get_postprocessor(config: Config):
         'gen': GENPostprocessor,
         'relation': RelationPostprocessor,
         't2fnorm': T2FNormPostprocessor,
+        'mds_mfs': MDS_MFSPostprocessor,
+        'mdspp_mfs': MDSPP_MFSPostprocessor,
+        'knn_mfs': KNN_MFSPostprocessor
     }
 
     return postprocessors[config.postprocessor.name](config)

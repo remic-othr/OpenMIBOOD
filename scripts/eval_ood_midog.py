@@ -20,10 +20,13 @@ def update(d, u):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--postprocessor', choices=['ash', 'dice', 'dropout', 'ebo', 'fdbd', 'gen', 'klm', 'knn', 'mls', 'mds_ensemble', 'mds', 'nnguide', 'odin', 'openmax', 'rankfeat', 'react', 'relation', 'residual', 'rmds', 'scale', 'she', 'temp_scaling', 'vim', 'msp'], default='msp')
+parser.add_argument('--postprocessor', choices=['ash', 'dice', 'dropout', 'ebo', 'fdbd', 'gen', 'klm', 'knn', 'mls', 'mds_ensemble', 'mds', 'nnguide', 'odin', 
+                                                'openmax', 'rankfeat', 'react', 'relation', 'residual', 'rmds', 'scale', 'she', 'temp_scaling', 'vim', 'msp',
+                                                'mds_mfs', 'mdspp_mfs', 'knn_mfs'], default='msp')
 parser.add_argument('--save-csv', action='store_true')
 parser.add_argument('--save-score', action='store_true')
-parser.add_argument('--batch-size', default=200, type=int)
+parser.add_argument('--batch-size', default=150, type=int)
+parser.add_argument('--seed', default=42, type=int)
 args = parser.parse_args()
 
 fsood = True
@@ -42,15 +45,15 @@ if not os.path.exists(ckpt_path):
 # specify an implemented postprocessor
 # 'openmax', 'msp', 'temp_scaling', 'odin'...
 postprocessor_name = args.postprocessor
-# load pre-setup postprocessor if exists
-if os.path.isfile(
-        os.path.join(root, 'postprocessors', f'{postprocessor_name}.pkl')):
-    with open(
-            os.path.join(root, 'postprocessors', f'{postprocessor_name}.pkl'),
-            'rb') as f:
-        postprocessor = pickle.load(f)
-else:
-    postprocessor = None
+# # load pre-setup postprocessor if exists
+# if os.path.isfile(
+#         os.path.join(root, 'postprocessors', f'{postprocessor_name}.pkl')):
+#     with open(
+#             os.path.join(root, 'postprocessors', f'{postprocessor_name}.pkl'),
+#             'rb') as f:
+#         postprocessor = pickle.load(f)
+# else:
+postprocessor = None
 
 # assuming the model is either
 # 1) torchvision pre-trained; or
@@ -80,8 +83,9 @@ evaluator = Evaluator(
     postprocessor_name=postprocessor_name,
     postprocessor=postprocessor,
     batch_size=args.batch_size,  # for certain methods the results can be slightly affected by batch size
-    shuffle=True,
-    num_workers=8)
+    shuffle=False,
+    num_workers=8,
+    seed=args.seed)
 
 # load pre-computed scores if exists
 if os.path.isfile(os.path.join(root, 'scores', f'{postprocessor_name}.pkl')):

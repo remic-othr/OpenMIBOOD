@@ -6,9 +6,25 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 import openood.utils.comm as comm
+import random
+import numpy as np
 
 
 class BasePostprocessor:
+
+    def set_seed(self, seed, fast_mode=False):
+        torch.manual_seed(seed)
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        
+        print(f'Setting seed to {seed}')
+        
+        torch.backends.cudnn.deterministic = not fast_mode
+        torch.backends.cudnn.benchmark = fast_mode    
+        torch.backends.cuda.matmul.allow_tf32 = fast_mode
+        torch.backends.cudnn.allow_tf32 = fast_mode
+
     def __init__(self, config):
         self.config = config
 
